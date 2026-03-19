@@ -9,6 +9,4 @@ services:
       - ./main.py:/app/main.py
       - ./pyproject.toml:/app/pyproject.toml
       - ./secrets:/app/secrets
-    env_file:
-      - .env
     restart: unless-stopped
