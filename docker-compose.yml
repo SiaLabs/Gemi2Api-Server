@@ -1,12 +1,19 @@
-version: "3"
+version: "3.8"
 
 services:
   gemini-api:
     build: .
+    container_name: gemini-api  # optional, nice for identification
     ports:
       - "8000:8000"
-    volumes:
-      - ./main.py:/app/main.py
-      - ./pyproject.toml:/app/pyproject.toml
-      - ./secrets:/app/secrets
     restart: unless-stopped
+
+    # IMPORTANT: Add this block to use Portainer UI variables
+    environment:
+      - SECURE_1PSID=${SECURE_1PSID}
+      - SECURE_1PSIDTS=${SECURE_1PSIDTS}
+      - API_KEY=${API_KEY}
+      - TEMPORARY_CHAT=${TEMPORARY_CHAT}
+      - AUTO_DELETE_CHAT=${AUTO_DELETE_CHAT}
+      - ENABLE_THINKING=${ENABLE_THINKING:-false}
+      - PUBLIC_BASE_URL=${PUBLIC_BASE_URL:-""}
